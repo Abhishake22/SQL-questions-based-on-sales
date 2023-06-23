@@ -1,0 +1,17 @@
+
+For table: Attached in the file
+
+
+order_id	orderdate	customer_id	Total_amount
+1	        17-06-2023	123	        50
+2	        18-06-2023	456	        75
+5	        19-06-2023	789	        120
+7	        23-06-2023	234	        90
+
+
+Query to find orders placed in weekends
+
+SELECT * FROM orders
+WHERE DATEPART(dw,orderdate) IN (1,7)
+
+

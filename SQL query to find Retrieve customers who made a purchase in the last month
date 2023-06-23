@@ -1,0 +1,47 @@
+
+1. 1. Write a query to retrieve all customers who made a purchase in the last month.
+
+Table structure:
+
+-- Create the "customers" table
+CREATE TABLE customers (
+  customer_id INT PRIMARY KEY,
+  customer_name VARCHAR(255),
+  customer_email VARCHAR(255)
+);
+
+-- Insert sample data into the "customers" table
+INSERT INTO customers (customer_id, customer_name, customer_email) VALUES
+  (1, 'John Doe', 'john.doe@example.com'),
+  (2, 'Jane Smith', 'jane.smith@example.com'),
+  (3, 'Michael Johnson', 'michael.johnson@example.com'),
+  (4, 'Emily Brown', 'emily.brown@example.com');
+
+-- Create the "orders" table
+CREATE TABLE orders (
+  order_id INT PRIMARY KEY,
+  customer_id INT,
+  order_date DATE,
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+-- Insert sample data into the "orders" table
+INSERT INTO orders (order_id, customer_id, order_date) VALUES
+  (1, 1, '2023-05-15'),
+  (2, 2, '2023-05-20'),
+  (3, 3, '2023-06-01'),
+  (4, 4, '2023-06-10'),
+  (5, 1, '2023-06-15'),
+  (6, 2, '2023-06-20'),
+  (7, 3, '2023-06-25');
+
+  SELECT * FROM customers
+  SELECT * FROM orders
+
+  ---Retrieve customers who made a purchase in the last month
+
+  SELECT c.customer_id,c.customer_name,c.customer_email
+  FROM customers c
+  JOIN orders o
+  ON c.customer_id = o.customer_id
+  WHERE o.order_date <= DATEADD(MONTH,-1,GETDATE())

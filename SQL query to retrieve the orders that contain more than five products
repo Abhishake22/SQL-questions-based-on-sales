@@ -1,0 +1,109 @@
+Question1. SQL query to retrieve the orders that contain more than five products
+
+Output should be order id, order date
+
+Lets assume, we have two tables
+
+Table structure
+
+— Create the “orders” table
+
+CREATE TABLE orders (
+
+order_id INT PRIMARY KEY,
+
+order_date DATE
+
+);
+
+— Insert sample data into the “orders” table
+
+INSERT INTO orders (order_id, order_date) VALUES
+
+(1, ‘2023–06–20’),
+
+(2, ‘2023–06–21’),
+
+(3, ‘2023–06–22’),
+
+(4, ‘2023–06–23’);
+
+— Create the “order_items” table
+
+CREATE TABLE order_items (
+
+item_id INT PRIMARY KEY,
+
+order_id INT,
+
+product_name VARCHAR(255),
+
+FOREIGN KEY (order_id) REFERENCES orders(order_id)
+
+);
+
+— Insert sample data into the “order_items” table
+
+INSERT INTO order_items (item_id, order_id, product_name) VALUES
+
+(1, 1, ‘Product A’),
+
+(2, 1, ‘Product B’),
+
+(3, 1, ‘Product C’),
+
+(4, 2, ‘Product A’),
+
+(5, 2, ‘Product B’),
+
+(6, 2, ‘Product C’),
+
+(7, 2, ‘Product D’),
+
+(8, 2, ‘Product E’),
+
+(9, 3, ‘Product A’),
+
+(10, 3, ‘Product B’),
+
+(11, 3, ‘Product C’),
+
+(12, 3, ‘Product D’),
+
+(13, 3, ‘Product E’),
+
+(14, 3, ‘Product F’),
+
+(15, 3, ‘Product G’),
+
+(16, 4, ‘Product A’),
+
+(17, 4, ‘Product B’),
+
+(18, 4, ‘Product C’),
+
+(19, 4, ‘Product D’),
+
+(20, 4, ‘Product E’),
+
+(21, 4, ‘Product F’),
+
+(22, 4, ‘Product G’),
+
+(23, 4, ‘Product H’),
+
+(24, 4, ‘Product I’),
+
+(25, 4, ‘Product J’);
+
+
+Query:
+
+SELECT o.order_id, o.order_date
+FROM orders o
+INNER JOIN (
+  SELECT order_id, COUNT(*) AS product_count
+  FROM order_items
+  GROUP BY order_id
+  HAVING COUNT(*) > 5
+) oi ON o.order_id = oi.order_id;

@@ -1,0 +1,22 @@
+
+SQL query to retrieve orders that were shipped late
+
+CREATE TABLE Orders (
+  OrderID INT PRIMARY KEY,
+  OrderDate DATE,
+  ShipDate DATE
+);
+
+
+INSERT INTO Orders (OrderID, OrderDate, ShipDate)
+VALUES
+  (1, '2023-06-01', '2023-06-05'),
+  (2, '2023-06-02', '2023-06-02'),
+  (3, '2023-06-03', '2023-06-04'),
+  (4, '2023-06-04', '2023-06-03'),
+  (5, '2023-06-05', '2023-06-06');
+
+
+SELECT *
+FROM Orders
+WHERE ShipDate > OrderDate;

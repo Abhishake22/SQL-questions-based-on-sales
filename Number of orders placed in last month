@@ -1,0 +1,22 @@
+SQL query to find number of orders placed in last month
+
+CREATE TABLE Orderssss (
+  OrderDate DATE,
+  );
+
+-- Inserting random values
+INSERT INTO Orderssss(OrderDate)
+VALUES
+  ('2023-03-10'),
+  ('2023-06-21'),
+  ('2023-04-05'),
+  ('2023-01-28'),
+  ('2023-05-15')
+
+
+
+SELECT orderDate,count(*) as Number_of_orders_last_month
+FROM Orderssss
+WHERE OrderDate >= DATEADD(MONTH, DATEDIFF(MONTH,0,GETDATE())-1,0)
+AND OrderDate < DATEADD(MONTH, DATEDIFF(MONTH,0,GETDATE()),0)
+GROUP BY OrderDate

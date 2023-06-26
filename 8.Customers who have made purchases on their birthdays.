@@ -1,0 +1,49 @@
+List the customers who have made purchases on their birthdays.
+
+
+CREATE TABLE Customers (
+  CustomerID INT PRIMARY KEY,
+  CustomerName VARCHAR(100),
+  Birthdate DATE
+);
+
+
+Table Structure for Purchases:
+
+CREATE TABLE Purchases (
+  PurchaseID INT PRIMARY KEY,
+  CustomerID INT,
+  PurchaseDate DATE,
+  Amount DECIMAL(10, 2),
+  FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+
+INSERT INTO Customers (CustomerID, CustomerName, Birthdate)
+VALUES
+  (1, 'John Smith', '1990-05-10'),
+  (2, 'Jane Doe', '1985-08-15'),
+  (3, 'Michael Johnson', '1992-02-20'),
+  (4, 'Emily Davis', '1988-11-25'),
+  (5, 'David Wilson', '1995-06-30');
+
+
+INSERT INTO Purchases (PurchaseID, CustomerID, PurchaseDate, Amount)
+VALUES
+  (1, 1, '2023-05-10', 150.50),
+  (2, 2, '2023-08-15', 75.25),
+  (3, 3, '2023-02-20', 200.00),
+  (4, 4, '2023-11-25', 50.00),
+  (5, 5, '2023-06-30', 120.75),
+  (6, 1, '2023-05-11', 180.00),
+  (7, 2, '2023-08-14', 90.50),
+  (8, 3, '2023-02-21', 250.00),
+  (9, 4, '2023-11-24', 75.50),
+  (10, 5, '2023-06-29', 110.25);
+
+
+SELECT c.CustomerID, c.CustomerName
+FROM Customers c
+JOIN Purchases p ON c.CustomerID = p.CustomerID
+WHERE MONTH(p.PurchaseDate) = MONTH(c.Birthdate) AND DAY(p.PurchaseDate) = DAY(c.Birthdate);
+

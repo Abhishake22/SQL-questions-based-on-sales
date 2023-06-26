@@ -1,0 +1,53 @@
+SQL query to List the customers who have made purchases above the average order value 
+
+Table Structure for Customers:
+
+
+CREATE TABLE Customers (
+  CustomerID INT PRIMARY KEY,
+  CustomerName VARCHAR(100)
+);
+
+
+Table Structure for Orders:
+
+
+CREATE TABLE Orders (
+  OrderID INT PRIMARY KEY,
+  CustomerID INT,
+  OrderValue DECIMAL(10, 2),
+  FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+
+
+INSERT INTO Customers (CustomerID, CustomerName)
+VALUES
+  (1, 'John Smith'),
+  (2, 'Jane Doe'),
+  (3, 'Michael Johnson'),
+  (4, 'Emily Davis'),
+  (5, 'David Wilson');
+
+
+INSERT INTO Orders (OrderID, CustomerID, OrderValue)
+VALUES
+  (1, 1, 150.50),
+  (2, 2, 75.25),
+  (3, 3, 200.00),
+  (4, 4, 50.00),
+  (5, 5, 120.75),
+  (6, 1, 180.00),
+  (7, 2, 90.50),
+  (8, 3, 250.00),
+  (9, 4, 75.50),
+  (10, 5, 110.25);
+
+
+SELECT c.CustomerID, c.CustomerName
+FROM Customers c
+JOIN Orders o ON c.CustomerID = o.CustomerID
+WHERE o.OrderValue > (SELECT AVG(OrderValue) FROM Orders)
+
+
+

@@ -1,0 +1,8 @@
+Retrieve Number of orders placed in the previous Quarter
+
+
+  SELECT OrderDate,COUNT(*)
+  from Orderssss
+  WHERE OrderDate >= DATEADD(QUARTER, DATEDIFF(QUARTER,0,GETDATE()) -1,0)
+  AND OrderDate < DATEADD(QUARTER, DATEDIFF(QUARTER,0,GETDATE()),0)
+  GROUP BY OrderDate

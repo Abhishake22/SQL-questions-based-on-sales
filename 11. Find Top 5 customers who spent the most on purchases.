@@ -1,0 +1,44 @@
+Find the top 5 customers who spent the most on purchases.
+
+Table - customers
+
+customer_id	customer_name
+  1	            John
+  2	            Emily
+  3	            Michael
+  4	            Sophia
+  5	            David
+
+Table - Purchases
+
+purchase_id	customer_id	purchase_amount
+  1	              1	      100.50
+  2	              2	      75.20
+  3	              1	      50.80
+  4	              3	      120.00
+  5	              4	      90.75
+  6	              1	      30.00
+  7              	4	      110.20
+  8	              2	      85.60
+  9	              3	      70.30
+  10	            5	      150.40
+
+Query:
+
+
+SELECT customer_name,SUM(ROUND(purchase_amount,2)) AS Purchase_amount
+FROM customerss c
+JOIN purchasess p
+ON c.customer_id = p.customer_id
+GROUP BY customer_name
+ORDER BY Purchase_amount DESC
+
+
+Output:
+
+customer_name	Purchase_amount
+      Sophia	200.95
+      Michael	190.3
+      John	  181.3
+      Emily	  160.8
+      David	  150.4

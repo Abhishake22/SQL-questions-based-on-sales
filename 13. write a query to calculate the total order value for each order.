@@ -1,0 +1,26 @@
+Given two tables, "Orders" and "OrderItems," write a query to calculate the total order value for each order and show its ouput
+
+order_id (INT) | order_date (DATE) |
+-------------------------------------
+|       1       |   2023-07-01     |
+|       2       |   2023-07-02     |
+-------------------------------------
+
+OrderItems
+----------------------------------------
+| item_id (INT) | order_id (INT) | value |
+----------------------------------------
+|      100      |       1        |  100  |
+|      101      |       1        |  150  |
+|      102      |       2        |  200  |
+|      103      |       2        |  250  |
+
+
+Output:
+
+SELECT o.order_id,SUM(value) as total_order_value
+FROM orders o
+JOIN order_items oi
+ON o.order_id = oi.order_id
+GROUP BY o.order_id
+

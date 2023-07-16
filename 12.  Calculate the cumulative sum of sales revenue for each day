@@ -6,7 +6,7 @@ FROM Sales
 
 
 Output:
-sale_date	  revenue	cumulative_sum
+sale_date	 revenuecumulative_sum
 2023-07-01	100	    100
 2023-07-01	150	    250
 2023-07-02	200	    200

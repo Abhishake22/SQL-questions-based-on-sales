@@ -25,7 +25,7 @@ Orders
 
 
 
-SELECT p.product_id,p.name,COUNT(os.order_id) as Total_Quantity_ordered
+SELECT TOP 3 p.product_id,p.name,COUNT(os.order_id) as Total_Quantity_ordered
 FROM orderss os
 JOIN products p
 ON os.product_id = p.product_id

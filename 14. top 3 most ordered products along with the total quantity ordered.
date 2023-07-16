@@ -1,0 +1,32 @@
+Write a query to find the top 3 most ordered products along with the total quantity ordered.
+
+
+Products
+-------------------------
+| product_id (INT) | name |
+-------------------------
+|        1         |  A   |
+|        2         |  B   |
+|        3         |  C   |
+|        4         |  D   |
+-------------------------
+
+Orders
+---------------------------------
+| order_id (INT) | product_id |
+---------------------------------
+|       1       |      1     |
+|       2       |      2     |
+|       3       |      1     |
+|       4       |      3     |
+|       5       |      2     |
+|       6       |      3     |
+|       7       |      3     |
+
+
+
+SELECT p.product_id,p.name,COUNT(os.order_id) as Total_Quantity_ordered
+FROM orderss os
+JOIN products p
+ON os.product_id = p.product_id
+GROUP BY p.product_id,p.name

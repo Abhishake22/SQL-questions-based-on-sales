@@ -1,0 +1,49 @@
+CREATE TABLE bands (
+    band_id INT PRIMARY KEY,
+    band_name VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY,
+    band_id INT,
+    order_date DATE NOT NULL,
+    -- Other order-related columns can be added here
+    FOREIGN KEY (band_id) REFERENCES bands (band_id)
+);
+
+
+INSERT INTO bands (band_id, band_name) VALUES
+(1, 'Band A'),
+(2, 'Band B'),
+(3, 'Band C');
+
+
+INSERT INTO orders (order_id, band_id, order_date) VALUES
+(101, 1, '2023-07-01'),
+(102, 2, '2023-07-02'),
+(103, 2, '2023-07-03'),
+(104, 1, '2023-07-04'),
+(105, 3, '2023-07-05'),
+(106, 2, '2023-07-06'),
+(107, 1, '2023-07-07'),
+(108, 3, '2023-07-08'),
+(109, 1, '2023-07-09'),
+(110, 2, '2023-07-10');
+
+
+Number of order per band
+
+SELECT b.band_name, COUNT(o.order_id) AS number_of_orders
+FROM bands b
+LEFT JOIN orders o ON b.band_id = o.band_id
+GROUP BY b.band_name;
+
+
+Output
+
+| band_name | number_of_orders |
+|-----------|------------------|
+| Band A    | 4                |
+| Band B    | 4                |
+| Band C    | 2                |

@@ -1,0 +1,23 @@
+Table:
+
+Orders
+
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    customer_name VARCHAR(100),
+    order_total DECIMAL(10, 2)
+);
+
+
+INSERT INTO Orders (order_id, order_date, customer_name, order_total)
+VALUES
+    (1, '2022-07-15', 'John Smith', 250.00),
+    (2, '2022-08-02', 'Jane Doe', 125.50),
+    (3, '2021-10-10', 'Michael Johnson', 180.00),
+    (4, '2023-01-05', 'Emily Brown', 50.00),
+    (5, '2023-06-20', 'Robert Williams', 300.75);
+
+
+DELETE FROM Orders
+WHERE order_date < DATEADD(year, -1, GETDATE());
